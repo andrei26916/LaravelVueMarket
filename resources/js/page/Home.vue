@@ -13,7 +13,7 @@
 
 <script>
 import ProductsComponent from '../components/ProductsComponent';
-import BannerComponent from '../components/layouts/BannerComponent';
+import BannerComponent from '../components/BannerComponent';
 import axios from "axios";
 
 export default {

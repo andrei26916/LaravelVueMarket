@@ -21,9 +21,26 @@
 </head>
 <body>
 
-<div id="app" :auth="@json(\Illuminate\Support\Facades\Auth::check())">
+<?php
+    $user = [
+        'id' => 1,
+        'login' => 'andrei',
+        'email' => 'andrei26916@mail.ru',
+        'birthDate' => '1997-03-03',
+        'last_name' => null,
+        'first_name' => null,
+        'father_name' => null,
+        'phone' => '89997788357',
+        'role' => 1,
+        'avatar' => 'https://e7.pngegg.com/pngimages/109/949/png-clipart-computer-software-management-business-service-technical-support-sugarplum-miscellaneous-infographic.png',
+    ];
+?>
+
+<div id="app" data-user='@json($user)'>
     <app></app>
 </div>
+
+
 
 </body>
 </html>

@@ -9,7 +9,7 @@
 
 <script>
     import ProductsComponent from '../components/ProductsComponent';
-    import BannerComponent from '../components/layouts/BannerComponent';
+    import BannerComponent from '../components/BannerComponent';
     export default {
         name: "Category",
         components: {
