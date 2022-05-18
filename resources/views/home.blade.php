@@ -36,7 +36,7 @@
     ];
 ?>
 
-<div id="app" data-user='@json($user)'>
+<div id="app" data-user='@json(\Illuminate\Support\Facades\Auth::user())'>
     <app></app>
 </div>
 

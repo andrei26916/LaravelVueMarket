@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\AuthLog;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Providers\RouteServiceProvider;
@@ -21,6 +22,11 @@ class LoginController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
         {
+            AuthLog::create([
+                'user_id' => Auth::id(),
+                'ip' => $request->getClientIp(),
+                'device' => $request->userAgent()
+            ]);
             return '/';
         }
         return response('', 402);

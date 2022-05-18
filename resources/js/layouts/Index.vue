@@ -56,19 +56,25 @@
                           <router-link style="text-decoration: none;" :to="{name: 'userSettings'}">
                             <el-dropdown-item class="clearfix"> <i class="el-icon-s-operation"></i> настройки</el-dropdown-item>
                           </router-link>
-                            <el-dropdown-item class="clearfix"> <i class="el-icon-close"></i> выход</el-dropdown-item>
+                            <a href="/logout" style="text-decoration: none;">
+                                <el-dropdown-item class="clearfix"> <i class="el-icon-close"></i>выход</el-dropdown-item>
+                            </a>
                         </el-dropdown-menu>
                     </el-dropdown>
 
                     <router-link v-if="!authorisation()" :to="{name: 'basket'}">
                       <div class="auth">
-                        <p>Вход</p>
+                          <router-link style="text-decoration: none;" :to="{name: 'Auth'}">
+                              <p>Вход</p>
+                          </router-link>
                       </div>
                     </router-link>
 
                     <router-link  v-if="!authorisation()" :to="{name: 'basket'}">
                       <div class="auth">
-                        <p>Регистрация</p>
+                          <router-link style="text-decoration: none;" :to="{name: 'Reg'}">
+                                <p>Регистрация</p>
+                          </router-link>
                       </div>
                     </router-link>
 

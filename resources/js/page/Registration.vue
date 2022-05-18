@@ -62,7 +62,7 @@ export default {
         {
             axios
                 .post('/api/registration', {
-                    name: this.name,
+                    login: this.name,
                     phone: this.phone,
                     email: this.email,
                     password: this.password

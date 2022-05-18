@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,4 +34,10 @@ Route::post('/product/{id}/update', [ProductController::class, 'update']);
 Route::group(['middleware' => ['auth:web']], function () {
     Route::get('baskets', [BasketController::class, 'index']);
     Route::get('favorites ', [FavoriteController::class, 'index']);
+
+    Route::post('/order/create', [OrderController::class, 'store']);
 });
+
+Route::post('/auth', [LoginController::class, 'auth']);
+Route::post('/registration', [RegisterController::class, 'create']);
+
