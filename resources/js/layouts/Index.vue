@@ -21,7 +21,7 @@
                             </div>
                         </el-dropdown-menu>
                     </el-dropdown>
-                    <el-input placeholder="Please input" v-model="search"></el-input>
+                    <el-input placeholder="Please input" v-model="search" @keyup.enter.native="enterClicked()"></el-input>
                 </div>
 
                 <div class="info">
@@ -110,7 +110,15 @@
                   return Object.keys(this.getUser()).length > 0;
               }
               return false;
+          },
+            enterClicked(){
+              this.$router.push('/search?q=' + this.search)
           }
+        },
+        mounted() {
+            if (this.$route.query.q){
+                this.search = this.$route.query.q;
+            }
         },
         components: {
             CategoriesComponent,

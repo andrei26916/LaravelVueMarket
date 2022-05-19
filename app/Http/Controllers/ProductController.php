@@ -56,4 +56,10 @@ class ProductController extends Controller
     {
         return $service->update($request->all());
     }
+
+
+    public function search(Request $request, ProductService $service)
+    {
+        return $service->search($request->q);
+    }
 }

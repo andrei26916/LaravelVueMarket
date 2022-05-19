@@ -74,4 +74,12 @@ class ProductService
         }
         return response()->json('ok');
     }
+
+
+    public function search(string $query)
+    {
+        return Product::where('title', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->get();
+    }
 }

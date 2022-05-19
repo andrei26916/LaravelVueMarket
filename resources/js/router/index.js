@@ -23,6 +23,7 @@ import Auth from "../page/Auth";
 import Registration from "../page/Registration";
 import ProfileComponent from "../page/ProfileComponent";
 import NotFoundComponent from "../page/NotFoundComponent";
+import Search from "../page/Search";
 
 export default new VueRouter ({
     mode: 'history',
@@ -47,6 +48,14 @@ export default new VueRouter ({
             name: 'home',
             path: '/',
             component: Home,
+            meta:{
+                layout: "index-layout"
+            }
+        },
+        {
+            name: 'search',
+            path: '/search',
+            component: Search,
             meta:{
                 layout: "index-layout"
             }

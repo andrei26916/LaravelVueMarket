@@ -27,13 +27,10 @@
           '$route.params.id': {
             immediate: true,
             handler() {
-                // axios.get('/api/category/' + $route.params.id).then(response => (this.category = response.data))
+                axios.get('/api/category/' + this.$route.params.id).then(response => (this.category = response.data))
               //получение данных с API
             }
           }
-        },
-        mounted(){
-            axios.get('/api/category/' + this.$route.params.id).then(response => (this.category = response.data))
         }
     }
 </script>
