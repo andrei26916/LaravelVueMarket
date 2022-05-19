@@ -49,7 +49,8 @@
                     <el-dropdown trigger="click" v-if="authorisation()">
                         <div class="profile">
                           <el-avatar :size="50">
-                            <img :src="this.getUser().avatar"/>
+                            <img v-if="this.getUser().avatar_url" :src="this.getUser().avatar_url"/>
+                            <img v-else src="/img/avatar.png"/>
                           </el-avatar>
                         </div>
                         <el-dropdown-menu slot="dropdown">
@@ -104,8 +105,11 @@
         methods: {
           ...mapGetters(['getUser']),
           authorisation(){
-            return Object.keys(this.getUser()).length > 0;
-
+              if (this.getUser()) {
+                  console.log(this.getUser());
+                  return Object.keys(this.getUser()).length > 0;
+              }
+              return false;
           }
         },
         components: {

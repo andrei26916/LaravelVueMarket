@@ -5,6 +5,10 @@ export default {
             state.user = user;
         },
 
+        setAvatar(state, url){
+            state.user.avatar_url = url;
+        },
+
         removeUser(state, id) {
             state.user = {}
 

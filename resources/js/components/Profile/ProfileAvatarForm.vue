@@ -1,15 +1,16 @@
 <template>
   <div>
 
-    <el-image style="width: 200px; height: 200px" :src="this.avatar.src"></el-image>
+    <el-image style="width: 200px; height: 200px" :src="this.getUser().avatar_url"></el-image>
 
     <el-upload
         class="upload-demo"
         ref="upload"
-        limit="1"
-        :file-list="[this.avatar]"
+        :limit="this.limit"
         name="image"
-        action="http://127.0.0.1:8000/api/image/upload"
+        :on-preview="this.handlePreview"
+        :on-change="this.handleChange"
+        action="/api/avatar/upload"
         :auto-upload="false">
       <el-button slot="trigger" size="small" type="primary">Выбрать фаил</el-button>
       <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">Загрузить</el-button>
@@ -19,20 +20,33 @@
 </template>
 
 <script>
+import {mapMutations, mapGetters} from "vuex";
+
 export default {
   name: "ProfileAvatarForm",
   data(){
     return {
-      avatar: {
-        name: 'aaa',
-        src: "https://e7.pngegg.com/pngimages/109/949/png-clipart-computer-software-management-business-service-technical-support-sugarplum-miscellaneous-infographic.png",
-      },
+        limit: 1,
     }
   },
   methods: {
-    submitUpload() {
-      console.log(this.$refs.upload.submit());
-    }
+      ...mapMutations(['setAvatar']),
+      ...mapGetters(['getUser']),
+      submitUpload() {
+          this.$refs.upload.submit()
+      },
+      handlePreview(file) {
+          console.log(file);
+      },
+      handleChange(file) {
+          console.log(file);
+          if (file.response){
+              if (file.response.url){
+                  this.setAvatar(file.response.url)
+              }
+          }
+          console.log(file);
+      }
   }
 }
 </script>

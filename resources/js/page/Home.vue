@@ -111,7 +111,7 @@ export default {
       }
     },
     mounted() {
-      axios.get('http://127.0.0.1:8000/api/products/category')
+      axios.get('http://10.100.3.232/api/products/category')
           .then(response => (this.categories = response.data))
     }
 }

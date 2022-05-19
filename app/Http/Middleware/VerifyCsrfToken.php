@@ -12,7 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://127.0.0.1:8000/api/image/upload',
-        'http://127.0.0.1:8000/api/products/create',
+        'http://10.100.3.232/api/avatar/upload',
     ];
 }
