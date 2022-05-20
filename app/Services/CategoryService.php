@@ -23,7 +23,7 @@ class CategoryService
      */
     public function show(int $id)
     {
-        return Category::with('products')->find($id);
+        return Category::with('products.images')->find($id);
     }
 
     /**
