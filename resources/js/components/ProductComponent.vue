@@ -21,8 +21,10 @@
                     <br>
                     <div class="card">
                         <h2>{{product.price}} ₽</h2>
-                        <el-button ><i class="el-icon-collection-tag"></i> Избранное</el-button>
-                        <el-button type="warning"><i class="el-icon-shopping-cart-full"></i> В корзину</el-button>
+                        <el-button v-if="!isCheckFavorites(this.product)" @click="submitFavorites"><i class="el-icon-collection-tag"></i> Избранное</el-button>
+                        <el-button v-else @click="removeFavorites"><i class="el-icon-collection-tag"></i> Удалить</el-button>
+                        <el-button v-if="!isCheck(this.product)" type="warning" @click="submit"><i class="el-icon-shopping-cart-full"></i> В корзину</el-button>
+                        <el-button v-else type="danger" @click="remove"><i class="el-icon-shopping-cart-full"></i>Удалить</el-button>
                     </div>
                 </div>
                 <el-tabs v-model="activeName">
@@ -43,6 +45,7 @@
 
 <script>
     import FeedbacksComponent from "./FeedbacksComponent";
+    import {mapGetters, mapMutations} from "vuex";
     export default {
         name: "ProductComponent",
         props: ['product'],
@@ -52,6 +55,40 @@
         data(){
             return {
                 activeName: 'first',
+            }
+        },
+        methods: {
+            ...mapMutations(['createBasket', 'removeBasket', 'createFavourites', 'removeFavourites']),
+            ...mapGetters(['allBasket', 'allFavourites']),
+            submit() {
+                this.createBasket(this.product)
+            },
+            submitFavorites() {
+                this.createFavourites(this.product)
+            },
+            remove() {
+                this.removeBasket(this.product.id);
+            },
+            removeFavorites() {
+                this.removeFavourites(this.product.id);
+            },
+            isCheck(product) {
+                let result = false;
+                this.allBasket().forEach(function (item) {
+                    if (item.id === product.id) {
+                        result = true;
+                    }
+                });
+                return result;
+            },
+            isCheckFavorites(product) {
+                let result = false;
+                this.allFavourites().forEach(function (item) {
+                    if (item.id === product.id) {
+                        result = true;
+                    }
+                });
+                return result;
             }
         }
     }
