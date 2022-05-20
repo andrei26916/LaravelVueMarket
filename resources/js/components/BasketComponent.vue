@@ -4,9 +4,9 @@
             <div>
                 <div class="basket" v-for="basket in allBasket">
                     <div class="img">
-                        <el-image
+                        <el-image v-for="image in basket.images" :key="image.id"
                                 style="width: 100px; height: 100px"
-                                :src="basket.image"></el-image>
+                                :src="image.src"></el-image>
                     </div>
                     <div class="info">
                         <p>{{basket.title}}</p>

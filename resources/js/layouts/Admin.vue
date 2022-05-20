@@ -11,12 +11,13 @@
 <script>
 import MenuComponent from '../components/Admin/MenuComponent';
 import BreadcrumbComponent from '../components/Admin/BreadcrumbComponent';
+import {mapGetters} from "vuex";
 
 export default {
     name: "Admin",
     components: {
       MenuComponent, BreadcrumbComponent
-    },
+    }
 }
 </script>
 

@@ -44,7 +44,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request, ProductService $service)
     {
-        return $service->store($request->all());
+        return $service->create($request->all());
     }
 
     /**
@@ -57,9 +57,23 @@ class ProductController extends Controller
         return $service->update($request->all());
     }
 
-
+    /**
+     * @param Request $request
+     * @param ProductService $service
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function search(Request $request, ProductService $service)
     {
         return $service->search($request->q);
+    }
+
+    /**
+     * @param Request $request
+     * @param ProductService $service
+     * @return string
+     */
+    public function remove(Request $request, ProductService $service)
+    {
+        return $service->remove($request->id);
     }
 }

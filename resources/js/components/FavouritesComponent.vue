@@ -2,11 +2,11 @@
     <div>
         <div class="c" v-if="count">
             <div class="card" v-for="favorite in favourites()">
-                <el-image
+                <el-image v-for="image in favorite.images" :key="image.id"
                         style="width: 100%; height: 100%"
-                        :src="favorite.image"></el-image>
+                        :src="image.src"></el-image>
                 <h3>3 050 <span style="font-size: 16px">₽</span> </h3>
-                <span style="color: #9e9e9e;font-size: 13px;">{{favorite.ball}}&nbsp;баллов на Плюс</span>
+<!--                <span style="color: #9e9e9e;font-size: 13px;">{{favorite.ball}}&nbsp;баллов на Плюс</span>-->
                 <el-rate v-model="favorite.rate" />
                 <p>{{favorite.title}}</p>
                 <div style="display: flex;flex-direction: column;align-items: flex-end;">

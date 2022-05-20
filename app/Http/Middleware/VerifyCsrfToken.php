@@ -13,5 +13,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'http://10.100.3.232/api/avatar/upload',
+        'http://10.100.3.232/api/upload',
     ];
 }

@@ -4,9 +4,8 @@
         <div class="product">
             <div class="images">
                 <el-carousel indicator-position="outside" style="width: 500px;">
-                    <el-carousel-item v-for="image in product.images" :key="item">
-                        <el-image :src="'http://127.0.0.1:8000/storage/' + image.src" fit="scale-down"></el-image>
-<!--                        <h3>{{ item }}</h3>-->
+                    <el-carousel-item v-for="image in product.images" :key="image.id">
+                        <el-image :src="image.src" fit="scale-down"></el-image>
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -15,7 +14,7 @@
                 <div class="prices">
                     <div class="card">
                         <p>Рейтинг:</p>
-<!--                        <el-rate v-model="product.rate" disabled />-->
+                        <el-rate v-model="product.rate" disabled />
 <!--                        <p style="margin-right: 20px" >{{product.rate}}</p>-->
 <!--                        <p style="color: #00000066 ">{{product.ball}} баллов на Плюс</p>-->
                     </div>

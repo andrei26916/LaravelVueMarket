@@ -150,7 +150,7 @@ export default new VueRouter ({
         },
         {
             name: 'AdminProduct',
-            path: '/admin/product/create',
+            path: '/admin/products/create',
             component: AdminProduct,
             meta:{
                 layout: "admin-layout"

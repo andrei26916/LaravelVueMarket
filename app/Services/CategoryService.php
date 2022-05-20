@@ -26,4 +26,12 @@ class CategoryService
         return Category::with('products')->find($id);
     }
 
+    /**
+     * @return mixed
+     */
+    public function categoriesList()
+    {
+        return Category::select('id', 'name')->get();
+    }
+
 }

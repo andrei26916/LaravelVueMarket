@@ -26,11 +26,13 @@ export default {
               name: 'AdminPanel',
               path: '/' + url[i]
             })
+              console.log('/' + url[i])
           }else {
             result.push({
               name: url[i],
               path: '/admin/' + url[i]
             })
+              console.log('/admin/' + url[i])
           }
         }
       }

@@ -26,4 +26,13 @@ class CategoryController extends Controller
     {
         return $service->show($request->id);
     }
+
+    /**
+     * @param CategoryService $service
+     * @return mixed
+     */
+    public function categoriesList(CategoryService $service)
+    {
+        return $service->categoriesList();
+    }
 }

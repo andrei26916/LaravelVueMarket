@@ -56,7 +56,7 @@
           }
         },
         mounted() {
-          axios.get('http://127.0.0.1:8000/api/product/' + this.$route.params.id)
+          axios.get('/api/product/' + this.$route.params.id)
               .then(response => (this.product = response.data))
         }
     }

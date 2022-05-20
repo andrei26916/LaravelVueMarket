@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Category;
 use App\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\File;
 
 class ProductService
 {
@@ -16,7 +17,7 @@ class ProductService
      */
     public function index()
     {
-        return Product::with('images', 'category')->get();
+        return Product::with('images', 'category')->orderBy('created_at', 'DESC')->get();
     }
 
     /**
@@ -34,7 +35,7 @@ class ProductService
     public function getProductsByCategory()
     {
         return (Category::with('products.images')
-            ->orderBy('priority')
+            ->orderBy('priority', 'DESC')
             ->get())
             ->filter(function ($item){
                 if ($item->products->count()) {
@@ -44,23 +45,16 @@ class ProductService
     }
 
     /**
-     * @param array $product
+     * @param $product
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(array $product): \Illuminate\Http\JsonResponse
+    public function create($product): \Illuminate\Http\JsonResponse
     {
-        $imageService = new ImageService();
-        if (!$productDb = Product::create($product)){
+        if (!$result = Product::create($product)){
             return response()->json('fail');
         }
-        foreach ($product['images'] as $image){
-            $path = $imageService->upload($image);
-            $productDb->images()->create([
-               'name' => $image->getClientOriginalName(),
-               'src' => $path
-            ]);
-        }
-        return response()->json('ok');
+        $result->images()->attach($product['images']);
+        return response()->json('success');
     }
 
     /**
@@ -78,8 +72,18 @@ class ProductService
 
     public function search(string $query)
     {
-        return Product::where('title', 'like', '%' . $query . '%')
+        return Product::with('images')->where('title', 'like', '%' . $query . '%')
             ->orWhere('description', 'like', '%' . $query . '%')
             ->get();
+    }
+
+    /**
+     * @param int $id
+     * @return string
+     */
+    public function remove(int $id): string
+    {
+        Product::where('id', $id)->delete();
+        return 'success';
     }
 }

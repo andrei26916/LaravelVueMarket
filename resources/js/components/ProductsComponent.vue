@@ -5,9 +5,9 @@
     </div>
     <div class="card" v-for="product in products">
       <router-link :to="{name: 'product', params: {id: product.id}}">
-        <el-image
+        <el-image v-for="image in product.images" :key="image.id"
             style="width: 100%; height: 100%"
-            :src="product.image"></el-image>
+            :src="image.src"></el-image>
       </router-link>
       <div class="priceAndFavorites">
         <h3>{{ product.price }} <span style="font-size: 16px">₽</span></h3>
@@ -15,7 +15,7 @@
             class="el-icon-s-flag"></i></a>
         <a v-else class="favorites_active" @click="removeFavourites(product.id)"><i class="el-icon-s-flag"></i></a>
       </div>
-      <span style="color: #9e9e9e;font-size: 13px;">{{ product.ball }}&nbsp;баллов на Плюс</span>
+<!--      <span style="color: #9e9e9e;font-size: 13px;">{{ product.ball }}&nbsp;баллов на Плюс</span>-->
       <el-rate v-model="product.rate" disabled/>
       <p>{{ product.title }}</p>
       <el-button v-if="!isCheck(product)" type="warning" @click="submit(product)">В корзину</el-button>
