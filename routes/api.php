@@ -58,6 +58,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::post('/product/{id}/update', [ProductController::class, 'update']);
     Route::delete('/product/{id}', [ProductController::class, 'remove']);
 
+    Route::post('/users', [UserController::class, 'index']);
+    Route::delete('/user/{id}', [UserController::class, 'remove']);
+
 });
 
 Route::post('/auth', [LoginController::class, 'auth']);

@@ -9,7 +9,6 @@ import Product from "../page/Product";
 import Category from "../page/Category";
 import Settings from "../page/User/Profile";
 import AdminOrders from "../page/Admin/AdminOrders";
-import AdminOrder from "../page/Admin/AdminOrder";
 import AdminIndex from "../page/Admin/AdminIndex";
 import AdminProducts from "../page/Admin/AdminProducts";
 import AdminProduct from "../page/Admin/AdminProduct";
@@ -24,6 +23,7 @@ import Registration from "../page/Registration";
 import ProfileComponent from "../page/ProfileComponent";
 import NotFoundComponent from "../page/NotFoundComponent";
 import Search from "../page/Search";
+import AdminUsers from "../page/Admin/AdminUsers";
 
 export default new VueRouter ({
     mode: 'history',
@@ -133,14 +133,6 @@ export default new VueRouter ({
             }
         },
         {
-            name: 'AdminOrder',
-            path: '/admin/order/create',
-            component: AdminOrder,
-            meta:{
-                layout: "admin-layout"
-            }
-        },
-        {
             name: 'AdminProducts',
             path: '/admin/products',
             component: AdminProducts,
@@ -160,6 +152,14 @@ export default new VueRouter ({
             name: 'AdminCategories',
             path: '/admin/categories',
             component: AdminCategories,
+            meta:{
+                layout: "admin-layout"
+            }
+        },
+        {
+            name: 'AdminUsers',
+            path: '/admin/users',
+            component: AdminUsers,
             meta:{
                 layout: "admin-layout"
             }

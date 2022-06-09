@@ -40,10 +40,12 @@
           <i class="el-icon-edit"></i>
           <span>Создать</span>
         </el-menu-item>
-        <el-menu-item index="5-2">
-          <i class="el-icon-tickets"></i>
-          <span>Список</span>
-        </el-menu-item>
+        <router-link :to="{name: 'AdminUsers'}" >
+            <el-menu-item index="5-2">
+                <i class="el-icon-tickets"></i>
+                <span>Список</span>
+            </el-menu-item>
+        </router-link>
       </el-submenu>
       <el-submenu index="6">
         <template slot="title">

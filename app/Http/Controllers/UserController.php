@@ -37,4 +37,23 @@ class UserController extends Controller
     {
         return User::where('id', Auth::id())->update($request->all());
     }
+
+    /**
+     * @param Request $request
+     * @return User[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function index(Request $request)
+    {
+        return User::all();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function remove(Request $request)
+    {
+        User::where('id', $request->id)->delete();
+        return response()->json('ok');
+    }
 }

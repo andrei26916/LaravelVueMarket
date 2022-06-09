@@ -2,17 +2,18 @@
 
   <div>
     <h1>Заказы</h1>
+      <OrdersListComponents/>
   </div>
 
 </template>
 
 <script>
-import ordersComponent from '../../components/OrdersComponent'
+import OrdersListComponents from '../../components/OrdersListComponent'
 
 export default {
   name: "AdminOrders",
   components: {
-    ordersComponent,
+      OrdersListComponents,
   }
 }
 </script>
