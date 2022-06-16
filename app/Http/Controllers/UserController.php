@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Services\ImageService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -55,5 +57,19 @@ class UserController extends Controller
     {
         User::where('id', $request->id)->delete();
         return response()->json('ok');
+    }
+
+    /**
+     * @param UserCreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function create(UserCreateRequest $request)
+    {
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+        if (User::create($data)) {
+            return response()->json('ok');
+        }
+        return response()->json('false');
     }
 }

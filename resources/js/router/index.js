@@ -24,16 +24,12 @@ import ProfileComponent from "../page/ProfileComponent";
 import NotFoundComponent from "../page/NotFoundComponent";
 import Search from "../page/Search";
 import AdminUsers from "../page/Admin/AdminUsers";
+import AdminUserCreate from "../page/Admin/AdminUserCreate";
 
 export default new VueRouter ({
     mode: 'history',
     linkExactActiveClass: "active",
     routes: [
-        {
-            name: '404',
-            path: '/404',
-            component: NotFound
-        },
         {
             name: 'Auth',
             path: '/auth',
@@ -163,6 +159,19 @@ export default new VueRouter ({
             meta:{
                 layout: "admin-layout"
             }
+        },
+        {
+            name: 'AdminUsersCreate',
+            path: '/admin/users/create',
+            component: AdminUserCreate,
+            meta:{
+                layout: "admin-layout"
+            }
+        },
+        {
+            name: '404',
+            path: '/404',
+            component: NotFound
         },
         {
             path: '*',

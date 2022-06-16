@@ -36,10 +36,12 @@
           <i class="el-icon-user"></i>
           <span>Пользователи</span>
         </template>
-        <el-menu-item index="5-1">
-          <i class="el-icon-edit"></i>
-          <span>Создать</span>
-        </el-menu-item>
+          <router-link :to="{name: 'AdminUsersCreate'}" >
+              <el-menu-item index="5-1">
+                  <i class="el-icon-edit"></i>
+                  <span>Создать</span>
+              </el-menu-item>
+          </router-link>
         <router-link :to="{name: 'AdminUsers'}" >
             <el-menu-item index="5-2">
                 <i class="el-icon-tickets"></i>
