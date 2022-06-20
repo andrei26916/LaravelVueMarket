@@ -34,6 +34,9 @@ Route::get('/banners', [BannerController::class, 'index']);
 Route::get('/product/{id}', [ProductController::class, 'show']);
 Route::get('/products/category', [ProductController::class, 'productsByCategory']);
 
+Route::post('/auth', [LoginController::class, 'auth']);
+Route::post('/registration', [RegisterController::class, 'create']);
+
 Route::group(['middleware' => ['auth:web']], function () {
     Route::get('baskets', [BasketController::class, 'index']);
     Route::post('basket', [BasketController::class, 'store']);
@@ -43,14 +46,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('favorites ', [FavoriteController::class, 'index']);
 
     Route::post('/order/create', [OrderController::class, 'store']);
-    Route::get('/orders', [OrderController::class, 'index']);
     Route::get('/user/orders', [OrderController::class, 'indexByUser']);
-
     Route::post('/user/order/{id}/cancel', [OrderController::class, 'cancelByUser']);
     Route::post('/user/order/{id}/repeat', [OrderController::class, 'repeatByUser']);
-
-    Route::post('/order/{id}/cancel', [OrderController::class, 'cancel']);
-    Route::post('/order/{id}/status', [OrderController::class, 'status']);
 
     Route::post('/avatar/upload', [UserController::class, 'uploadAvatar']);
     Route::post('/profile/update', [UserController::class, 'update']);
@@ -59,11 +57,20 @@ Route::group(['middleware' => ['auth:web']], function () {
         $imageService = new \App\Services\ImageService();
         $path = $imageService->upload($request->file('image'));
         $path = '/storage/' . $path;
+
         return \App\Image::create([
-            'name' => $request->file('image')->getClientOriginalName(),
-            'src' => $path
+          'name' => $request->file('image')->getClientOriginalName(),
+          'src' => $path
         ]);
     });
+});
+
+
+Route::group(['middleware' => ['role:admin']], function () {
+
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::post('/order/{id}/cancel', [OrderController::class, 'cancel']);
+    Route::post('/order/{id}/status', [OrderController::class, 'status']);
 
     Route::get('/products', [ProductController::class, 'index']);
     Route::post('/products/create', [ProductController::class, 'store']);
@@ -75,7 +82,4 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::delete('/user/{id}', [UserController::class, 'remove']);
 
 });
-
-Route::post('/auth', [LoginController::class, 'auth']);
-Route::post('/registration', [RegisterController::class, 'create']);
 
