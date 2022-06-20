@@ -2,24 +2,27 @@
 
     <div>
         <div class="order" v-for="order in orders">
-            <h3>Заказ № {{order.number}}</h3>
+            <h3>Заказ № {{order.id * 113}}</h3>
 
-            <el-steps :active="order.status" finish-status="success" style="margin-bottom: 20px;">
+            <el-steps :active="order.status" finish-status="success" style="margin-bottom: 20px;" v-if="order.status !== 5">
                 <el-step title="Собран"></el-step>
                 <el-step title="В пути"></el-step>
                 <el-step title="Получен"></el-step>
             </el-steps>
+            <div v-else>
+                <h2>Заказ отменен</h2>
+            </div>
 
             <div class="orderItem">
-                <div class="product" v-for="product in order.products">
+                <div class="product" v-for="product in order.data">
                     <div class="img">
-                        <el-image
-                                style="width: 100px; height: 100px"
-                                :src="product.image"></el-image>
+                        <el-image v-for="image in product.images" :key="image.id"
+                                  style="width: 100px; height: 100px"
+                                  :src="image.src"></el-image>
                     </div>
                     <div class="info">
                         <p>{{product.title}}</p>
-                        <p style="font-size: 12px; font-weight: bold">{{product.price}} ₽</p>
+                        <p style="font-size: 12px; font-weight: bold">{{product.price}} ₽ x {{product.count}}</p>
                         <router-link :to="{name: 'product', params: {id: product.id}}">
                             <el-button size="mini" type="info">Оставить отзыв</el-button>
                         </router-link>
@@ -28,19 +31,24 @@
             </div>
 
             <div class="orderInfo">
-                <p>Дата оформления: <span>{{order.date}}</span></p>
-                <h4>Способ оплаты:</h4>
-                <p>Картой онлайн 4 045 ₽ за 3 товара, оплачено</p>
+                <p>Дата оформления: <span>{{(new Date(order.created_at)).toLocaleDateString()}}</span></p>
+                <h4>
+                    Способ оплаты:
+                </h4>
+                <p>
+                    <span v-if="order.payment">Наличные</span>
+                    <span v-else >Картой онлайн</span>
+                    {{ order.price }} ₽ за {{order.data.length}} товара</p>
                 <h4>Способ получения</h4>
-                <p>Адрес: <span>{{order.recipientAddress}}</span></p>
-                <p>Получатель: <span>{{order.recipient}}, тел. {{order.recipientPhone}}</span></p>
-                <p>Дата доставки: <span>12–13 марта доставка Яндекса: Стош Андрей, тел. +7 999 684-47-60</span></p>
+                <p>Адрес: <span>{{order.recipient_address}}</span></p>
+                <p>Получатель: <span>{{order.recipient}}, тел. {{order.recipient_phone}}</span></p>
+                <p>Дата доставки: <span>5–13 дней</span></p>
                 <p>Срок хранения: <span>3 дня</span></p>
-                <p>Стоимость доставки: <span> 349 ₽</span></p>
+<!--                <p>Стоимость доставки: <span> 349 ₽</span></p>-->
                 <div>
-                    <el-button style="margin-top: 12px;" type="success" >Чат с продавцом</el-button>
-                    <el-button style="margin-top: 12px;" type="warning" >Повторить</el-button>
-                    <el-button style="margin-top: 12px;" type="info" >Отменить</el-button>
+                    <el-button style="margin-top: 12px;" type="success" v-if="order.status !== 5">Чат с продавцом</el-button>
+                    <el-button style="margin-top: 12px;" type="warning" @click="repeat(order.id)">Повторить</el-button>
+                    <el-button style="margin-top: 12px;" type="info" @click="cancel(order.id)" v-if="order.status === 0">Отменить</el-button>
                 </div>
             </div>
 
@@ -56,47 +64,59 @@
         data(){
             return {
                 orders: [
-                    {
-                        id: 1,
-                        number: '15374042',
-                        status: 1,
-                        products: [
-                            {id: 1, price: 350, title: 'Проектор XGIMI Elfin', rate: 2.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
-                            {id: 2, price: 350, title: 'BENQ Проектор Benq Mw632st', rate: 4.9, ball: 540, image: 'https://avatars.mds.yandex.net/get-marketpic/5487168/picf79c4a3690aa28611a52237a58100d27/200x200'},
-                            {id: 3, price: 350, title: 'Проектор XGIMI Elfin', rate: 4.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
-                        ],
-                        recipient: 'Стош Андрей',
-                        recipientPhone: '+7 999 684-67-61',
-                        recipientAddress: 'Пункт выдачи заказов PickPoint. Иркутск, Свердлова ул., д. 36',
-                        date: '4 января, 18:54'
-                    },
-                    {
-                        id: 2,
-                        number: '15374043',
-                        status: 3,
-                        products: [
-                            {id: 4, price: 350, title: 'Проектор XGIMI Elfin', rate: 4.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
-                            {id: 5, price: 350, title: 'Проектор XGIMI Elfin', rate: 4.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
-                            {id: 6, price: 350, title: 'Проектор XGIMI Elfin', rate: 4.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
-                        ],
-                        recipient: 'Иванов Андрей',
-                        recipientPhone: '+7 999 867-77-65',
-                        recipientAddress: 'Пункт выдачи заказов PickPoint. Иркутск, Свердлова ул., д. 36',
-                        date: '9 декабря 2021, 18:54'
-                    }
+                    // {
+                    //     id: 1,
+                    //     number: '15374042',
+                    //     status: 1,
+                    //     products: [
+                    //         {id: 1, price: 350, title: 'Проектор XGIMI Elfin', rate: 2.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
+                    //         {id: 2, price: 350, title: 'BENQ Проектор Benq Mw632st', rate: 4.9, ball: 540, image: 'https://avatars.mds.yandex.net/get-marketpic/5487168/picf79c4a3690aa28611a52237a58100d27/200x200'},
+                    //         {id: 3, price: 350, title: 'Проектор XGIMI Elfin', rate: 4.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
+                    //     ],
+                    //     recipient: 'Стош Андрей',
+                    //     recipientPhone: '+7 999 684-67-61',
+                    //     recipientAddress: 'Пункт выдачи заказов PickPoint. Иркутск, Свердлова ул., д. 36',
+                    //     date: '4 января, 18:54'
+                    // },
+                    // {
+                    //     id: 2,
+                    //     number: '15374043',
+                    //     status: 3,
+                    //     products: [
+                    //         {id: 4, price: 350, title: 'Проектор XGIMI Elfin', rate: 4.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
+                    //         {id: 5, price: 350, title: 'Проектор XGIMI Elfin', rate: 4.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
+                    //         {id: 6, price: 350, title: 'Проектор XGIMI Elfin', rate: 4.5, ball: 540, image: 'https://avatars.mds.yandex.net/get-mpic/5235397/img_id5560564623219774984.png/5hq'},
+                    //     ],
+                    //     recipient: 'Иванов Андрей',
+                    //     recipientPhone: '+7 999 867-77-65',
+                    //     recipientAddress: 'Пункт выдачи заказов PickPoint. Иркутск, Свердлова ул., д. 36',
+                    //     date: '9 декабря 2021, 18:54'
+                    // }
                 ]
             }
         },
         methods: {
             repeat (id){
+                axios.post('/api/user/order/' + id + '/repeat').then(response => (
+                    this.orders.unshift(response.data)
+                ));
 
             },
             cancel (id){
+                axios.post('/api/user/order/' + id + '/cancel').then(response => (console.log(response.data)));
+                this.orders.forEach((element) => {
+                    if (element.id === id){
+                        element.status = 5;
+                    }
+                })
 
             },
             sellerChat (){
 
             }
+        },
+        mounted() {
+            axios.get('/api/user/orders').then(response => (this.orders = response.data))
         }
     }
 </script>
@@ -150,6 +170,7 @@
         align-content: flex-start;
         align-items: flex-start;
         text-align: left;
+        padding-left: 10px;
     }
 
     .orderInfo p{

@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class OrderService
 {
 
-    /**
-     * @param array $order
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
     public function store(array $order)
     {
         $baskets = (new BasketService())->index();
@@ -29,9 +25,11 @@ class OrderService
             return $item->product;
         });
 
+        $order['price'] = $baskets->sum('price');
+
         $order['user_id'] = Auth::id();
 
-        $order['data'] = json_encode($baskets);
+        $order['data'] = $baskets;
 
         if (Order::create($order)){
             Basket::where('user_id', Auth::id())->delete();

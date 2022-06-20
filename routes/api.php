@@ -43,6 +43,11 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('favorites ', [FavoriteController::class, 'index']);
 
     Route::post('/order/create', [OrderController::class, 'store']);
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/user/orders', [OrderController::class, 'indexByUser']);
+
+    Route::post('/user/order/{id}/cancel', [OrderController::class, 'cancelByUser']);
+    Route::post('/user/order/{id}/repeat', [OrderController::class, 'repeatByUser']);
 
     Route::post('/avatar/upload', [UserController::class, 'uploadAvatar']);
     Route::post('/profile/update', [UserController::class, 'update']);

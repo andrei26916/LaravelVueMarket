@@ -61,7 +61,7 @@ import {mapGetters, mapMutations} from 'vuex';
                     recipient_Address: '',
                     payment: '1',
                     isProfile: true,
-                    comment: ''
+                    comment: null
                 },
                 rules: {
                     recipient: [
