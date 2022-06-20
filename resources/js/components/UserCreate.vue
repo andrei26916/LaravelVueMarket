@@ -69,7 +69,6 @@ export default {
     methods: {
         go(){
             axios.post('/api/user/create', this.user).then(response => (console.log(response.data)));
-            console.log(this.user)
         }
     }
 }

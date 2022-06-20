@@ -36,6 +36,10 @@ Route::get('/products/category', [ProductController::class, 'productsByCategory'
 
 Route::group(['middleware' => ['auth:web']], function () {
     Route::get('baskets', [BasketController::class, 'index']);
+    Route::post('basket', [BasketController::class, 'store']);
+    Route::post('basket/{id}', [BasketController::class, 'update']);
+    Route::delete('basket/{id}', [BasketController::class, 'remove']);
+
     Route::get('favorites ', [FavoriteController::class, 'index']);
 
     Route::post('/order/create', [OrderController::class, 'store']);

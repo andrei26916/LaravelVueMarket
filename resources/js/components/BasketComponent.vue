@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="countBasket" style="display: flex; justify-content: space-between;align-items: flex-start;">
+        <div v-if="allBasket.length" style="display: flex; justify-content: space-between;align-items: flex-start;">
             <div>
                 <div class="basket" v-for="basket in allBasket">
                     <div class="img">
