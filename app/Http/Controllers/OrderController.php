@@ -13,7 +13,7 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        return Order::all();
+        return Order::orderBy('created_at', 'desc')->get();
     }
 
 
@@ -54,5 +54,34 @@ class OrderController extends Controller
     public function store(OrderCreateRequest $request, OrderService $service)
     {
         return $service->store($request->all());
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function status(Request $request)
+    {
+        $order = Order::find($request->id);
+
+        if ($order->status < 3){
+            $order->status += 1;
+            $order->save();
+        }
+
+        return response('ok');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function cancel(Request $request)
+    {
+        Order::where('id', $request->id)->update([
+            'status' => 5
+        ]);
+
+        return response('ok');
     }
 }

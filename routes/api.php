@@ -49,6 +49,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::post('/user/order/{id}/cancel', [OrderController::class, 'cancelByUser']);
     Route::post('/user/order/{id}/repeat', [OrderController::class, 'repeatByUser']);
 
+    Route::post('/order/{id}/cancel', [OrderController::class, 'cancel']);
+    Route::post('/order/{id}/status', [OrderController::class, 'status']);
+
     Route::post('/avatar/upload', [UserController::class, 'uploadAvatar']);
     Route::post('/profile/update', [UserController::class, 'update']);
 
