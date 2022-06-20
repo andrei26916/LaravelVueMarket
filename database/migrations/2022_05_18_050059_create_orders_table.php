@@ -22,7 +22,9 @@ class CreateOrdersTable extends Migration
             $table->string('recipient_address');
             $table->integer('payment')->default(1);
             $table->string('comments');
+            $table->integer('status')->default(0);
             $table->text('data');
+            $table->decimal('price')->default(0);
             $table->timestamps();
         });
     }

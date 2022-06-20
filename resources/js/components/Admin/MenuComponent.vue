@@ -2,7 +2,7 @@
 
   <div class="menu">
     <el-menu
-        default-active="2"
+        default-active="1"
         class="el-menu-vertical-demo">
 <!--        @open="handleOpen"-->
 <!--        @close="handleClose">-->
