@@ -31,7 +31,6 @@ class OrderCreateRequest extends FormRequest
             'recipient_phone' => ['required', 'string', 'max:11'],
             'recipient_address' => ['required', 'string'],
             'payment' => ['required', 'string'],
-            'comments' => ['required', 'string'],
         ];
     }
 }

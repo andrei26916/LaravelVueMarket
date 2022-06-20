@@ -1,9 +1,22 @@
 <template>
-    <div>
+    <div v-if="state" class="order_success">
+        <h1>Ваш заказ успешно оформлен!</h1>
+        <i class="el-icon-success"></i>
+        <p>Теперь вы можете следить за выполнением заказа в своем личном кабинете</p>
+        <div class="btn">
+            <router-link :to="{name: 'home'}" >
+                <el-button >На главную</el-button>
+            </router-link>
+            <router-link :to="{name: 'orders'}" >
+                <el-button type="primary" >Отслеживать заказ</el-button>
+            </router-link>
+        </div>
+    </div>
+    <div v-else>
         <h1>Оформить заказ</h1>
         <el-form ref="form" :model="form" :rules="rules" label-width="200px">
             <el-form-item label="Использовать профиль">
-                <el-switch v-model="form.isProfile" @change="isProfile" disabled></el-switch>
+                <el-switch v-model="form.isProfile" @change="isProfile" ></el-switch>
             </el-form-item>
 
             <el-form-item label="ФИО получателя" prop="recipient">
@@ -17,8 +30,8 @@
             </el-form-item>
             <el-form-item label="Способ оплаты">
                 <el-radio-group v-model="form.payment">
-                    <el-radio v-model="form.payment" label="0">Картой онлайн</el-radio>
-                    <el-radio v-model="form.payment" label="1">Наличными</el-radio>
+                    <el-radio v-model="form.payment" label="0" disabled>Картой онлайн</el-radio>
+                    <el-radio v-model="form.payment" label="1" >Наличными</el-radio>
                 </el-radio-group>
             </el-form-item>
             <el-form-item label="Комментарии">
@@ -37,6 +50,7 @@ import {mapGetters, mapMutations} from 'vuex';
         computed: mapGetters(['getUser']),
         data() {
             return {
+                state: false,
                 profile: {
                     recipient: 'Иванов Иван Иванович',
                     recipient_Phone: '89996655540',
@@ -45,7 +59,7 @@ import {mapGetters, mapMutations} from 'vuex';
                     recipient: '',
                     recipient_Phone: '',
                     recipient_Address: '',
-                    payment: '0',
+                    payment: '1',
                     isProfile: true,
                     comment: ''
                 },
@@ -90,7 +104,11 @@ import {mapGetters, mapMutations} from 'vuex';
                                 payment: this.form.payment,
                                 comments: this.form.comment,
                             })
-                            .then(response => (response.data));
+                            .then(response => {
+                                if (response.data === 'ok'){
+                                    this.state = true;
+                                }
+                            });
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -106,5 +124,30 @@ import {mapGetters, mapMutations} from 'vuex';
 </script>
 
 <style scoped>
+
+.order_success{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.order_success h1{
+    text-align: center;
+    font-size: 40px;
+}
+
+.order_success i{
+    font-size: 100px;
+    text-align: center;
+    color: #4ac36f;
+}
+.order_success p{
+    text-align: center;
+    font-size: 18px;
+    color: #4c4c4c;
+}
+
+.order_success .btn {
+    margin: 0 auto;
+}
 
 </style>
