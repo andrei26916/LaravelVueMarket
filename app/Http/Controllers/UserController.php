@@ -87,7 +87,10 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
-        if (User::create($data)) {
+        if ($user = User::create($data)) {
+            if (!empty($data['role_id'])){
+                $user->roles()->sync([$data['role_id']]);
+            }
             return response()->json('ok');
         }
         return response()->json('false');

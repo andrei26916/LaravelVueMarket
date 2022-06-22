@@ -26,10 +26,10 @@
       </router-link>
 
       <router-link :to="{name: 'AdminCategories'}" >
-        <el-menu-item index="4">
-          <i class="el-icon-files"></i>
-          <span>Категории </span>
-        </el-menu-item>
+<!--        <el-menu-item index="4">-->
+<!--          <i class="el-icon-files"></i>-->
+<!--          <span>Категории </span>-->
+<!--        </el-menu-item>-->
       </router-link>
       <el-submenu index="5">
         <template slot="title">
@@ -49,16 +49,16 @@
             </el-menu-item>
         </router-link>
       </el-submenu>
-      <el-submenu index="6">
-        <template slot="title">
-          <i class="el-icon-brush"></i>
-          <span>Дизайн главной страницы</span>
-        </template>
-        <el-menu-item index="5-1">
-          <i class="el-icon-monitor"></i>
-          <span>Изменить баннер</span>
-        </el-menu-item>
-      </el-submenu>
+<!--      <el-submenu index="6">-->
+<!--&lt;!&ndash;        <template slot="title">&ndash;&gt;-->
+<!--&lt;!&ndash;          <i class="el-icon-brush"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;          <span>Дизайн главной страницы</span>&ndash;&gt;-->
+<!--&lt;!&ndash;        </template>&ndash;&gt;-->
+<!--&lt;!&ndash;        <el-menu-item index="5-1">&ndash;&gt;-->
+<!--&lt;!&ndash;          <i class="el-icon-monitor"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;          <span>Изменить баннер</span>&ndash;&gt;-->
+<!--&lt;!&ndash;        </el-menu-item>&ndash;&gt;-->
+<!--      </el-submenu>-->
       <el-menu-item index="7">
         <i class="el-icon-close"></i>
         <span>Выход</span>

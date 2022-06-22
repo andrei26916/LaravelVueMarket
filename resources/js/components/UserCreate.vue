@@ -19,9 +19,6 @@
         <el-form-item label="Пароль">
             <el-input type="password" v-model="user.password" placeholder="Введите пароль"></el-input>
         </el-form-item>
-        <el-form-item label="Подтверждение пароля" >
-            <el-input type="password" v-model="user.confirm_password" placeholder="Подтвердите пароль"></el-input>
-        </el-form-item>
         <el-form-item label="Телефон">
             <el-input v-model="user.phone" placeholder="Введите телефон"></el-input>
         </el-form-item>
@@ -50,26 +47,19 @@ export default {
                 login: null,
                 email: null,
                 password: null,
-                confirm_password: null,
                 phone: null,
                 role_id: null,
             },
-            roles: [
-                {
-                    id: 1,
-                    name: 'Admin',
-                },
-                {
-                    id: 2,
-                    name: 'User'
-                }
-            ]
+            roles: []
         }
     },
     methods: {
         go(){
             axios.post('/api/user/create', this.user).then(response => (console.log(response.data)));
         }
+    },
+    mounted() {
+        axios.get('/api/roles').then(response => (this.roles = response.data));
     }
 }
 </script>
