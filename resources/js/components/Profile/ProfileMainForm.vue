@@ -1,22 +1,22 @@
 <template>
   <el-form label-position="left" label-width="150px">
     <el-form-item label="Фамилия">
-      <el-input :disabled="this.disabled" v-model="this.user.last_name" placeholder="Незаполненно"></el-input>
+      <el-input :disabled="this.disabled" v-model="user.last_name" placeholder="Незаполненно"></el-input>
     </el-form-item>
     <el-form-item label="Имя">
-      <el-input :disabled="this.disabled" v-model="this.user.first_name" placeholder="Незаполненно"></el-input>
+      <el-input :disabled="this.disabled" v-model="user.first_name" placeholder="Незаполненно"></el-input>
     </el-form-item>
     <el-form-item label="Отчество">
-      <el-input :disabled="this.disabled" v-model="this.user.father_name" placeholder="Незаполненно"></el-input>
+      <el-input :disabled="this.disabled" v-model="user.father_name" placeholder="Незаполненно"></el-input>
     </el-form-item>
     <el-form-item label="Телефон">
-      <el-input :disabled="this.disabled" v-model="this.user.phone" placeholder="Незаполненно"></el-input>
+      <el-input :disabled="this.disabled" v-model="user.phone" placeholder="Незаполненно"></el-input>
     </el-form-item>
     <el-form-item label="Никнейм">
-      <el-input :disabled="this.disabled" v-model="this.user.login" placeholder="Незаполненно"></el-input>
+      <el-input :disabled="this.disabled" v-model="user.login" placeholder="Незаполненно"></el-input>
     </el-form-item>
     <el-form-item label="E-mail">
-      <el-input :disabled="this.disabled" v-model="this.user.email" placeholder="Незаполненно"></el-input>
+      <el-input :disabled="this.disabled" v-model="user.email" placeholder="Незаполненно"></el-input>
     </el-form-item>
     <el-form-item label="Дата рождения">
       <el-input :disabled="this.disabled" v-model="this.user.birthDate"
@@ -42,7 +42,8 @@ export default {
       this.disabled = !this.disabled;
     },
     save() {
-      this.disabled = !this.disabled;
+        axios.post('/api/profile/update', this.user).then(response => (console.log(response.data)));
+        this.disabled = !this.disabled;
     },
   }
 }
