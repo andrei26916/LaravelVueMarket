@@ -5,9 +5,9 @@
     </div>
     <div class="card" v-for="product in products">
       <router-link :to="{name: 'product', params: {id: product.id}}">
-        <el-image v-for="image in product.images" :key="image.id"
+        <el-image
             style="width: 100%; height: 100%"
-            :src="image.src"></el-image>
+            :src="product.images[0].src"></el-image>
       </router-link>
       <div class="priceAndFavorites">
         <h3>{{ product.price }} <span style="font-size: 16px">₽</span></h3>

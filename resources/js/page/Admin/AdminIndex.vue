@@ -1,20 +1,20 @@
 <template>
   <div>
     <h1>Админ Панель</h1>
-    <div class="statistics">
-      <div class="categories block_style">
-        <p>Заказы по категориям</p>
-        <div v-for="category in statisticCategories" style="display: flex; margin-bottom: 10px;">
-          <span style="margin-right: 10px; color: #0006;">{{ category.name }}</span>
-          <el-progress :percentage="category.order_count"  :format="format" style="width: 100%"></el-progress>
-        </div>
-      </div>
-      <div class="block_style" >
-        <h1>Заказов</h1>
-        <el-progress type="circle" :percentage="25" color="#5cb87a"></el-progress>
-      </div>
+<!--    <div class="statistics">-->
+<!--      <div class="categories block_style">-->
+<!--        <p>Заказы по категориям</p>-->
+<!--        <div v-for="category in statisticCategories" style="display: flex; margin-bottom: 10px;">-->
+<!--          <span style="margin-right: 10px; color: #0006;">{{ category.name }}</span>-->
+<!--          <el-progress :percentage="category.order_count"  :format="format" style="width: 100%"></el-progress>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="block_style" >-->
+<!--        <h1>Заказов</h1>-->
+<!--        <el-progress type="circle" :percentage="25" color="#5cb87a"></el-progress>-->
+<!--      </div>-->
 
-    </div>
+<!--    </div>-->
   </div>
 </template>
 

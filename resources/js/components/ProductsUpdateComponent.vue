@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h1>Создать товар</h1>
-
         <p>Название</p>
         <el-input placeholder="Введите название" v-model="product.title"></el-input>
 
@@ -36,10 +34,10 @@
             :on-success="handleSuccess"
             :file-list="product.images"
             list-type="picture">
-            <el-button size="small" type="primary">Click to upload</el-button>
+            <el-button size="small" type="primary">Выбрать фаил</el-button>
             <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
         </el-upload>
-        <el-button type="success" @click="save()">Save</el-button>
+        <el-button type="success" @click="save()">Сохранить</el-button>
     </div>
 </template>
 

@@ -43,7 +43,7 @@
                         <el-input
                             v-model="search"
                             size="mini"
-                            placeholder="Type to search"/>
+                            placeholder="Поиск"/>
                     </template>
                     <template slot-scope="scope">
                         <el-button
