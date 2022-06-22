@@ -84,7 +84,7 @@ axios.interceptors.response.use((response) => {
             type: TYPE.WARNING,
         });
     } else if (error.response.status === 403 || error.response.status === 401){
-        Vue.$toast("Нет доступа, авторизуйтесь", {
+        Vue.$toast("авторизуйтесь", {
             timeout: 4000,
         });
     }else{
