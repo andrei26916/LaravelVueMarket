@@ -13,7 +13,12 @@
             <span style="color: #9e9e9e;font-size: 13px;">Категория:&nbsp <b>{{ product.category.name }}</b></span>
             <el-rate v-model="product.rate" disabled/>
             <p>{{ product.title }}</p>
-            <el-button type="danger" size="mini" plain @click="remove(product.id)">Удалить</el-button>
+            <div class="buttons">
+                <router-link :to="{name: 'AdminProductUpdate', params: {id: product.id}}" >
+                    <el-button type="warning" size="mini">Изменить</el-button>
+                </router-link>
+                <el-button type="danger" size="mini" plain @click="remove(product.id)">Удалить</el-button>
+            </div>
         </div>
     </div>
 </template>
@@ -74,8 +79,9 @@ b{
     min-height: 35px;
 }
 
-.card button {
-    margin-top: 10px;
+.card .buttons {
+    display: inline-flex;
+    justify-content: space-around;
     width: 100%;
 }
 

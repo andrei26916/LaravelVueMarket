@@ -25,6 +25,7 @@ import NotFoundComponent from "../page/NotFoundComponent";
 import Search from "../page/Search";
 import AdminUsers from "../page/Admin/AdminUsers";
 import AdminUserCreate from "../page/Admin/AdminUserCreate";
+import AdminProductUpdate from "../page/Admin/AdminProductUpdate";
 
 export default new VueRouter ({
     mode: 'history',
@@ -140,6 +141,14 @@ export default new VueRouter ({
             name: 'AdminProduct',
             path: '/admin/products/create',
             component: AdminProduct,
+            meta:{
+                layout: "admin-layout"
+            }
+        },
+        {
+            name: 'AdminProductUpdate',
+            path: '/admin/products/:id',
+            component: AdminProductUpdate,
             meta:{
                 layout: "admin-layout"
             }

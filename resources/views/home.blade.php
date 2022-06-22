@@ -23,7 +23,9 @@
 
 <?php
     $user = \Illuminate\Support\Facades\Auth::user();
-    $user->load('roles');
+    if (!is_null($user)){
+        $user->load('roles');
+    }
 ?>
 
 <div id="app" data-user='@json($user)'>

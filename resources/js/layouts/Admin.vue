@@ -17,7 +17,7 @@ export default {
     name: "Admin",
     components: {
       MenuComponent, BreadcrumbComponent
-    }
+    },
 }
 </script>
 

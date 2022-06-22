@@ -26,7 +26,9 @@ class ProductService
      */
     public function show(int $id)
     {
-        return Product::with('images', 'feedbacks.user')->find($id);
+        return Product::with(['images' => function($query){
+            $query->select('*', 'src as url');
+        }, 'feedbacks.user'])->find($id);
     }
 
     /**
@@ -58,15 +60,22 @@ class ProductService
     }
 
     /**
-     * @param array $product
-     * @return \Illuminate\Http\JsonResponse
+     * @param array $data
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function update(array $product): \Illuminate\Http\JsonResponse
+    public function update(array $data)
     {
-        if (!Product::where('id', $product['id']->update($product))){
-            return response()->json('fail');
-        }
-        return response()->json('ok');
+        $product = Product::find($data['id']);
+        $product->title = $data['title'];
+        $product->description = $data['description'];
+        $product->price = $data['price'];
+        $product->category_id = $data['category_id'];
+
+        $product->images()->sync(collect($data['images'])->pluck('image_id'));
+
+        $product->save();
+
+        return response('ok');
     }
 
 
