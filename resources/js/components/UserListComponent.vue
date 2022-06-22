@@ -95,7 +95,7 @@ export default {
             this.users = this.users.filter((num, i) => i !== index)
         },
         edit(index, row){
-            console.log()
+            this.$router.push({name: 'AdminUsersUpdate', params: {id: row.id}})
         }
     }
 }

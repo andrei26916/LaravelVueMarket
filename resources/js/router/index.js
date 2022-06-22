@@ -26,6 +26,7 @@ import Search from "../page/Search";
 import AdminUsers from "../page/Admin/AdminUsers";
 import AdminUserCreate from "../page/Admin/AdminUserCreate";
 import AdminProductUpdate from "../page/Admin/AdminProductUpdate";
+import AdminUser from "../page/Admin/AdminUser";
 
 export default new VueRouter ({
     mode: 'history',
@@ -157,6 +158,14 @@ export default new VueRouter ({
             name: 'AdminCategories',
             path: '/admin/categories',
             component: AdminCategories,
+            meta:{
+                layout: "admin-layout"
+            }
+        },
+        {
+            name: 'AdminUsersUpdate',
+            path: '/admin/users/:id',
+            component: AdminUser,
             meta:{
                 layout: "admin-layout"
             }

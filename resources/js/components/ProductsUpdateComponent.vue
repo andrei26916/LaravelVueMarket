@@ -75,7 +75,6 @@ name: "ProductsUpdateComponent",
     },
     mounted() {
         axios.get('/api/categories/list').then(response => (this.categories = response.data));
-        console.log(this.categories)
     }
 }
 </script>

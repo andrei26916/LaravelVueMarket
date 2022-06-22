@@ -68,6 +68,10 @@ Route::group(['middleware' => ['auth:web']], function () {
 
 Route::group(['middleware' => ['role:admin']], function () {
 
+    Route::get('/roles', function(){
+        return \App\Role::all();
+    });
+
     Route::get('/orders', [OrderController::class, 'index']);
     Route::post('/order/{id}/cancel', [OrderController::class, 'cancel']);
     Route::post('/order/{id}/status', [OrderController::class, 'status']);
@@ -79,6 +83,8 @@ Route::group(['middleware' => ['role:admin']], function () {
 
     Route::post('/users', [UserController::class, 'index']);
     Route::post('/user/create', [UserController::class, 'create']);
+    Route::get('/user/{id}', [UserController::class, 'show']);
+    Route::post('/user/{id}/update', [UserController::class, 'update']);
     Route::delete('/user/{id}', [UserController::class, 'remove']);
 
 });

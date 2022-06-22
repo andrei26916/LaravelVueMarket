@@ -37,7 +37,27 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request)
     {
-        return User::where('id', Auth::id())->update($request->all());
+        $data = $request->all();
+
+        $user = User::find($data['id']);
+        $user->last_name = $data['last_name'];
+        $user->first_name = $data['first_name'];
+        $user->father_name = $data['father_name'];
+        $user->login = $data['login'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        if (!empty($data['password'])){
+            $user->password = Hash::make($data['password']);
+        }
+
+        if (!empty($data['role_id'])){
+            $user->roles()->sync([$data['role_id']]);
+        }
+
+        $user->save();
+
+        return response('ok');
+
     }
 
     /**
@@ -72,4 +92,20 @@ class UserController extends Controller
         }
         return response()->json('false');
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function show(Request $request)
+    {
+        $user = User::with('roles')->find($request->id);
+        $user['role_id'] = null;
+        if ($role = $user->roles->first()){
+            $user['role_id'] = $role->id;
+        }
+
+        return $user;
+    }
+
 }

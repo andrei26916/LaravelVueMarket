@@ -8,6 +8,11 @@ use App\Permission;
 trait HasRolesAndPermissions
 {
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class,'users_roles');
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class,'users_roles');
