@@ -25,7 +25,8 @@
             </div>
 
             <div class="information">
-                <el-button @click="$router.push({name: 'order'})" type="warning">Перейти к оформлению</el-button>
+                <el-button @click="$router.push({name: 'order'})" type="warning" v-if="authorisation()">Перейти к оформлению</el-button>
+                <el-button @click="$router.push({name: 'order'})" type="warning" v-else disabled>Перейти к оформлению</el-button>
                 <div class="i">
                     <h4> Итого</h4>
                     <h4> {{resultBasket().prices}} ₽</h4>
@@ -55,7 +56,7 @@
         computed: mapGetters(['allBasket', 'countBasket', 'countFavourites']),
         methods: {
             ...mapMutations(['removeBasket', 'updateCountProduct', 'createFavourites', 'removeFavourites']),
-            ...mapGetters(['resultBasket', 'allFavourites']),
+            ...mapGetters(['resultBasket', 'allFavourites', 'getUser']),
             handleChange(value, id){
                 console.log(value);
                 this.updateCountProduct({value, id})
@@ -75,6 +76,13 @@
             });
             return result;
           },
+            authorisation(){
+                if (this.getUser()) {
+                    console.log(this.getUser());
+                    return Object.keys(this.getUser()).length > 0;
+                }
+                return false;
+            },
         }
     }
 </script>
