@@ -6,6 +6,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -63,6 +64,8 @@ Route::group(['middleware' => ['auth:web']], function () {
           'src' => $path
         ]);
     });
+
+    Route::post('/feedback/create', [FeedbackController::class, 'store']);
 });
 
 

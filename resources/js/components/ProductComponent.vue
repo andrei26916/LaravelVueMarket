@@ -36,7 +36,7 @@
             </div>
 
         </div>
-        <FeedbacksComponent/>
+        <FeedbacksComponent :feedbacks="product.feedbacks"/>
 
 
 

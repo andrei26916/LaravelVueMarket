@@ -3,10 +3,10 @@
     <div class="content">
         <ProductComponent :product="this.product"/>
     </div>
-    <div class="content">
-      <h1>С этим товаром покупают</h1>
-      <ProductsComponent :products="this.recommendations"/>
-    </div>
+<!--    <div class="content">-->
+<!--      <h1>С этим товаром покупают</h1>-->
+<!--      <ProductsComponent :products="this.recommendations"/>-->
+<!--    </div>-->
   </div>
 </template>
 
